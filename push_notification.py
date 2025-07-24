@@ -38,12 +38,10 @@ class PushAPI:
             # 요청 파라미터 설정
             parameters = {
                 "app_id": PushAPI.APP_ID,
-                "target_channel": "iOSPush",
                 "headings": {"en": title},
                 "contents": {"en": message},
                 "ios_badgeType": "Increase",
                 "ios_badgeCount": 1,
-                # "included_segments": ["Total Subscriptions"],
                 "include_aliases": {
                     "onesignal_id": [
                         "27d455a0-9ce9-4d4f-bbd2-fe68810fd5f1",
@@ -110,7 +108,6 @@ class PushAPISync:
             # 요청 파라미터 설정
             parameters = {
                 "app_id": PushAPISync.APP_ID,
-                "target_channel": "iOSPush",
                 "headings": {"en": title},
                 "contents": {"en": message},
                 "ios_badgeType": "Increase",

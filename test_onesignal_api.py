@@ -91,11 +91,15 @@ def test_onesignal_api():
         # 테스트 푸시 데이터
         data = {
             "app_id": app_id,
-            "included_segments": ["Total Subscriptions"],
-            "headings": {"en": "🔑 API 테스트"},
-            "contents": {"en": "OneSignal API 키가 정상 작동합니다!"},
+            "headings": {"en": "API Test"},
+            "contents": {"en": "OneSignal API key is working correctly!"},
             "ios_badgeType": "Increase",
             "ios_badgeCount": 1,
+            "include_aliases": {
+                "onesignal_id": [
+                    "27d455a0-9ce9-4d4f-bbd2-fe68810fd5f1",
+                ]
+            },
         }
 
         response = requests.post(url, headers=headers, json=data, timeout=10)
