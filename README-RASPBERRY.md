@@ -2,6 +2,19 @@
 
 라즈베리파이에서 도커를 사용해 202번 버스 자동 알림 시스템을 24/7 실행하는 가이드입니다.
 
+## ⚡ 빠른 시작 (이미 설정된 경우)
+
+```bash
+# 프로젝트 디렉토리로 이동
+cd bus-push
+
+# 즉시 시작
+docker compose up -d
+
+# 로그 확인
+docker compose logs -f
+```
+
 ## 🛠️ 사전 준비
 
 ### 1. 라즈베리파이 설정
@@ -68,11 +81,11 @@ TZ=Asia/Seoul
 
 ### 3. 시스템 시작
 ```bash
-# 간편 시작 스크립트 실행
-./start.sh
+# 🚀 가장 간단한 방법
+docker compose up -d
 
-# 또는 직접 도커 컴포즈 실행
-docker compose up --build -d
+# 또는 스크립트 사용 (추가 검증 포함)
+./start.sh
 ```
 
 ## 📋 관리 명령어
