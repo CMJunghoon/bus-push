@@ -102,7 +102,7 @@ def format_bus_message(bus_info):
     plate_no1 = bus_info.get("plateNo1", "")
     plate_no2 = bus_info.get("plateNo2", "")
 
-    message = f"호반써밋라포레후문 정류장\n"
+    message = ""
 
     # 첫 번째 버스 정보
     bus1_name = plate_no1 if plate_no1 else "202번"
@@ -177,7 +177,7 @@ async def check_bus():
 
     if should_push:
         # 4. 푸시 알림 전송
-        title = "202번 버스 도착 알림"
+        title = "202번 버스, 호반써밋라포레후문 정류장"
         message = format_bus_message(bus_info)
 
         print(f"🔔 푸시 알림 전송 중...")
