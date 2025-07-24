@@ -76,11 +76,16 @@ def should_send_push(bus_info):
     except (ValueError, TypeError):
         return False, "도착 시간 정보 없음"
 
-    # 푸시 알림 조건: 가장 빠른 버스가 11분 전일 때
-    if time1 is not None and time1 == 11:
-        return True, f"🚌 202번 버스가 {time1}분 후 도착합니다!"
+        # 푸시 알림 조건: 가장 빠른 버스가 11분 이하일 때
+    if time1 is not None and time1 <= 11:
+        if time1 <= 1:
+            return True, f"🚨 긴급! 202번 버스가 {time1}분 후 도착합니다!"
+        elif time1 <= 3:
+            return True, f"🔥 곧 도착! 202번 버스가 {time1}분 후 도착합니다!"
+        else:
+            return True, f"🚌 202번 버스가 {time1}분 후 도착합니다!"
 
-    return False, "알림 조건 불충족 (11분이 아님)"
+    return False, f"알림 조건 불충족 ({time1}분 > 11분)"
 
 
 def format_bus_message(bus_info):
