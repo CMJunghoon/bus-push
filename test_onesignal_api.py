@@ -8,6 +8,10 @@ API 키가 올바른지 직접 확인
 import os
 import requests
 import json
+from dotenv import load_dotenv
+
+# .env 파일 로드
+load_dotenv()
 
 
 def test_onesignal_api():

@@ -7,7 +7,11 @@
 
 import os
 import asyncio
+from dotenv import load_dotenv
 from push_notification import PushAPI
+
+# .env 파일 로드
+load_dotenv()
 
 
 async def test_push():
