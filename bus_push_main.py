@@ -143,10 +143,10 @@ async def check_bus():
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"\n⏰ {current_time} - 202번 버스 확인 중...")
 
-    # 평일 오전 5:45-6:00 시간대가 아니면 실행하지 않음 (테스트용 주석처리)
-    # if not is_target_time():
-    #     print("❌ 실행 시간이 아닙니다. (평일 오전 5:45-6:00만 실행)")
-    #     return
+    # 평일 오전 5:45-6:00 시간대가 아니면 실행하지 않음
+    if not is_target_time():
+        print("❌ 실행 시간이 아닙니다. (평일 오전 5:45-6:00만 실행)")
+        return
 
     # 1. 버스 정보 조회
     bus_info = get_bus_info()
@@ -167,13 +167,9 @@ async def check_bus():
     print(f"   - 도착예정시간2: {predict_time2}분 후")
     print(f"   - 차량번호: {plate_no1}")
 
-    # 3. 푸시 알림 조건 확인 (테스트용: 항상 푸시 발송)
-    # should_push, reason = should_send_push(bus_info)
-    # print(f"📱 푸시 알림 판단: {reason}")
-
-    # 테스트용: 항상 푸시 발송
+    # 3. 푸시 알림 조건 확인 (시간대 내에서는 항상 발송)
     should_push = True
-    print(f"📱 푸시 알림 판단: 테스트 모드 - 항상 발송")
+    print(f"📱 푸시 알림 판단: 시간대 내 - 항상 발송")
 
     if should_push:
         # 4. 푸시 알림 전송
@@ -200,8 +196,8 @@ def run_scheduler():
     print("=" * 60)
     print("🚌 202번 버스 자동 알림 시스템 시작")
     print("📍 정류장: 호반써밋라포레후문 (ID: 223000149)")
-    print("⏰ 실행 조건: 테스트 모드 - 1분마다 (시간 제한 없음)")
-    print("🎯 알림 조건: 테스트 모드 - 항상 푸시 발송")
+    print("⏰ 실행 조건: 평일 오전 5:45-6:00, 1분마다")
+    print("🎯 알림 조건: 시간대 내에서는 항상 푸시 발송")
     print("=" * 60)
 
     # 매분마다 실행하도록 스케줄 설정
