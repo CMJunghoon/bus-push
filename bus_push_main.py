@@ -9,7 +9,11 @@ import time
 import schedule
 import os
 from datetime import datetime, time as dt_time
+from dotenv import load_dotenv
 from push_notification import PushAPI
+
+# .env 파일 로드
+load_dotenv()
 
 
 def get_bus_info(station_id="223000149"):
