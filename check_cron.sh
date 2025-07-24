@@ -12,8 +12,8 @@ echo "📋 현재 crontab:"
 crontab -l 2>/dev/null || echo "설정된 crontab이 없습니다."
 echo ""
 
-echo "🐳 도커 컨테이너 상태:"
-docker compose ps 2>/dev/null || echo "도커가 실행되지 않았거나 프로젝트 디렉토리가 아닙니다."
+echo "🐳 bus-push 도커 컨테이너 상태:"
+docker compose ps 2>/dev/null | grep bus-push || echo "bus-push 도커가 실행되지 않았거나 프로젝트 디렉토리가 아닙니다."
 echo ""
 
 echo "📝 Cron 로그 (최근 10줄):"

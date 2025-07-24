@@ -42,13 +42,13 @@ echo "   - Cron 로그 확인: tail -f /home/coolmint/bus-push-cron.log"
 echo "   - Cron 작업 확인: crontab -l"
 echo "   - Cron 서비스 상태: sudo systemctl status cron"
 echo ""
-echo "⚠️  현재 실행 중인 도커 컨테이너를 중지하시겠습니까? (y/n)"
+echo "⚠️  현재 실행 중인 bus-push 도커 컨테이너를 중지하시겠습니까? (y/n)"
 read -r response
 if [[ "$response" =~ ^[Yy]$ ]]; then
-    echo "🛑 도커 컨테이너 중지 중..."
+    echo "🛑 bus-push 도커 컨테이너 중지 중..."
     cd $PROJECT_DIR && ./stop.sh
-    echo "✅ 도커 컨테이너가 중지되었습니다."
+    echo "✅ bus-push 도커 컨테이너가 중지되었습니다."
     echo "🕐 이제 평일 오전 5:44에 자동으로 시작됩니다!"
 else
-    echo "ℹ️  도커 컨테이너가 계속 실행 중입니다."
+    echo "ℹ️  bus-push 도커 컨테이너가 계속 실행 중입니다."
 fi 
