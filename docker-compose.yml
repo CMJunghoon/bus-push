@@ -1,17 +1,12 @@
-version: '3.8'
-
 services:
   bus-push:
     build: .
     container_name: bus-push-system
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - TZ=Asia/Seoul
-      # 버스 API 설정 (실제 값으로 변경 필요)
-      - BUS_API_KEY=your_bus_api_key_here
-      # OneSignal 설정 (실제 값으로 변경 필요)
-      - ONESIGNAL_APP_ID=your_app_id_here
-      - ONESIGNAL_REST_KEY=your_rest_key_here
     volumes:
       # 로그 파일을 호스트에 저장 (선택사항)
       - ./logs:/app/logs
