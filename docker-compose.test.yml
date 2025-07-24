@@ -1,0 +1,30 @@
+services:
+  bus-push-test:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: bus-push-test:latest
+    container_name: bus-push-test-system
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      # 로그 파일을 호스트에 저장
+      - ./logs:/app/logs
+    networks:
+      - bus-test-network
+    # 헬스체크 추가
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import os; exit(0 if os.getenv('BUS_API_KEY') else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # 테스트용 명령어
+    command: python3 test_bus_push.py
+
+networks:
+  bus-test-network:
+    driver: bridge 
