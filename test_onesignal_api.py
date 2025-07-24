@@ -95,6 +95,7 @@ def test_onesignal_api():
         # 테스트 푸시 데이터
         data = {
             "app_id": app_id,
+            "target_channel": "iOSPush",
             "headings": {"en": "API Test"},
             "contents": {"en": "OneSignal API key is working correctly!"},
             "ios_badgeType": "Increase",

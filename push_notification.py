@@ -38,6 +38,7 @@ class PushAPI:
             # 요청 파라미터 설정
             parameters = {
                 "app_id": PushAPI.APP_ID,
+                "target_channel": "iOSPush",
                 "headings": {"en": title},
                 "contents": {"en": message},
                 "ios_badgeType": "Increase",
@@ -108,6 +109,7 @@ class PushAPISync:
             # 요청 파라미터 설정
             parameters = {
                 "app_id": PushAPISync.APP_ID,
+                "target_channel": "iOSPush",
                 "headings": {"en": title},
                 "contents": {"en": message},
                 "ios_badgeType": "Increase",
