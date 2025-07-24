@@ -12,11 +12,8 @@ class PushAPI:
     """OneSignal 푸시 알림 API 클래스"""
 
     # OneSignal 설정값 (환경변수 또는 기본값)
-    APP_ID = os.getenv("ONESIGNAL_APP_ID", "469c1259-34c6-4b68-bc0f-aa7c9147a440")
-    REST_KEY = os.getenv(
-        "ONESIGNAL_REST_KEY",
-        "os_v2_app_i2obewjuyzfwrpapvj6jcr5eic5t36ygg4kulu5pnu2pvjoqc4fzbh2uank5bomdul7uc5qfb5zp446d75scmiemodu2byx5b6vub5q",
-    )
+    APP_ID = os.getenv("ONESIGNAL_APP_ID")
+    REST_KEY = os.getenv("ONESIGNAL_REST_KEY")
 
     @staticmethod
     async def send(title: str, message: str) -> bool:
@@ -29,6 +26,14 @@ class PushAPI:
         Returns:
             bool: 전송 성공 여부
         """
+        # 환경변수 체크
+        if not PushAPI.APP_ID or not PushAPI.REST_KEY:
+            print("❌ OneSignal 환경변수가 설정되지 않았습니다.")
+            print(
+                "💡 .env 파일에서 ONESIGNAL_APP_ID와 ONESIGNAL_REST_KEY를 설정해주세요."
+            )
+            return False
+
         try:
             # 요청 파라미터 설정
             parameters = {

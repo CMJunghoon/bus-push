@@ -17,8 +17,13 @@ def main():
     print(f"⏰ 조회시간: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
-    # API 설정 (환경변수 또는 기본값)
+    # API 설정 (환경변수에서 가져오기)
     api_key = os.getenv("BUS_API_KEY")
+    if not api_key:
+        print("❌ BUS_API_KEY 환경변수가 설정되지 않았습니다.")
+        print("💡 .env 파일을 생성하고 BUS_API_KEY를 설정해주세요.")
+        return
+
     url = "https://apis.data.go.kr/6410000/busarrivalservice/v2/getBusArrivalListv2"
 
     params = {"format": "json", "serviceKey": api_key, "stationId": "223000149"}
