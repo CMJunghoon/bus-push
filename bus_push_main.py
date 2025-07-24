@@ -7,6 +7,7 @@ import urllib.parse
 import asyncio
 import time
 import schedule
+import os
 from datetime import datetime, time as dt_time
 from push_notification import PushAPI
 
@@ -14,8 +15,11 @@ from push_notification import PushAPI
 def get_bus_info(station_id="223000149"):
     """버스 도착 정보 조회"""
 
-    # API 설정
-    api_key = "AHjKW+qu2/FOtF3rr3+d0PYHm1ItUYDCyaq2RYkUqrCMb0pY42Q20KMMZGV5PBHLFkZqZWwXiPVz5riNMKeV4A=="
+    # API 설정 (환경변수 또는 기본값)
+    api_key = os.getenv(
+        "BUS_API_KEY",
+        "AHjKW+qu2/FOtF3rr3+d0PYHm1ItUYDCyaq2RYkUqrCMb0pY42Q20KMMZGV5PBHLFkZqZWwXiPVz5riNMKeV4A==",
+    )
     url = "https://apis.data.go.kr/6410000/busarrivalservice/v2/getBusArrivalListv2"
 
     params = {"format": "json", "serviceKey": api_key, "stationId": station_id}

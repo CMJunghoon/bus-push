@@ -4,6 +4,7 @@
 import subprocess
 import json
 import urllib.parse
+import os
 from datetime import datetime
 
 
@@ -16,8 +17,8 @@ def main():
     print(f"⏰ 조회시간: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
-    # API 설정
-    api_key = "AHjKW+qu2/FOtF3rr3+d0PYHm1ItUYDCyaq2RYkUqrCMb0pY42Q20KMMZGV5PBHLFkZqZWwXiPVz5riNMKeV4A=="
+    # API 설정 (환경변수 또는 기본값)
+    api_key = os.getenv("BUS_API_KEY")
     url = "https://apis.data.go.kr/6410000/busarrivalservice/v2/getBusArrivalListv2"
 
     params = {"format": "json", "serviceKey": api_key, "stationId": "223000149"}

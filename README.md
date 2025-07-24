@@ -16,11 +16,27 @@
 pip3 install -r requirements.txt
 ```
 
-### 2. OneSignal 설정
-`push_notification.py` 파일에서 다음 값들을 설정하세요:
-```python
-APP_ID = "your_onesignal_app_id"
-REST_KEY = "your_onesignal_rest_api_key"
+### 2. 환경변수 설정
+환경변수 파일을 생성하고 API 키들을 설정하세요:
+```bash
+# 환경변수 파일 생성
+cp env.example .env
+
+# .env 파일 편집
+nano .env
+```
+
+**.env 파일 예시:**
+```bash
+# 버스 API 설정
+BUS_API_KEY=your_bus_api_key_here
+
+# OneSignal 설정
+ONESIGNAL_APP_ID=your_onesignal_app_id_here
+ONESIGNAL_REST_KEY=your_onesignal_rest_key_here
+
+# 시간대 설정
+TZ=Asia/Seoul
 ```
 
 ## 🚀 사용법

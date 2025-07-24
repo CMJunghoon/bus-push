@@ -55,6 +55,9 @@ nano .env
 
 **.env 파일 예시:**
 ```bash
+# 버스 API 설정 (실제 값으로 변경)
+BUS_API_KEY=AHjKW+qu2/FOtF3rr3+d0PYHm1ItUYDCyaq2RYkUqrCMb0pY42Q20KMMZGV5PBHLFkZqZWwXiPVz5riNMKeV4A==
+
 # OneSignal 설정 (실제 값으로 변경)
 ONESIGNAL_APP_ID=469c1259-34c6-4b68-bc0f-aa7c9147a440
 ONESIGNAL_REST_KEY=os_v2_app_i2obewjuyzfwrpapvj6jcr5eic5t36ygg4...
