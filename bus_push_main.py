@@ -8,6 +8,7 @@ import asyncio
 import time
 import schedule
 import os
+import holidays
 from datetime import datetime, time as dt_time
 from dotenv import load_dotenv
 from push_notification import PushAPI
@@ -125,9 +126,26 @@ def is_weekday():
     return datetime.now().weekday() < 5  # 0-4가 평일
 
 
+def is_holiday():
+    """한국 공휴일인지 확인하는 함수"""
+    try:
+        kr_holidays = holidays.country_holidays("KR")
+        today = datetime.now().date()
+        return today in kr_holidays
+    except Exception as e:
+        print(f"⚠️  공휴일 확인 중 오류 발생: {e}")
+        # 오류 발생 시 공휴일이 아닌 것으로 처리 (기본 동작 유지)
+        return False
+
+
 def is_target_time():
-    """현재 시간이 평일 오전 5:45-6:00 사이인지 확인"""
+    """현재 시간이 평일(공휴일 제외) 오전 5:45-6:00 사이인지 확인"""
+    # 평일이 아니면 실행하지 않음
     if not is_weekday():
+        return False
+
+    # 공휴일이면 실행하지 않음
+    if is_holiday():
         return False
 
     now = datetime.now().time()
@@ -143,9 +161,17 @@ async def check_bus():
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"\n⏰ {current_time} - 202번 버스 확인 중...")
 
-    # 평일 오전 5:45-6:00 시간대가 아니면 실행하지 않음
+    # 평일(공휴일 제외) 오전 5:45-6:00 시간대가 아니면 실행하지 않음
     if not is_target_time():
-        print("❌ 실행 시간이 아닙니다. (평일 오전 5:45-6:00만 실행)")
+        if not is_weekday():
+            print("❌ 실행 시간이 아닙니다. (주말입니다)")
+        elif is_holiday():
+            kr_holidays = holidays.country_holidays("KR")
+            today = datetime.now().date()
+            holiday_name = kr_holidays.get(today, "공휴일")
+            print(f"❌ 실행 시간이 아닙니다. (오늘은 공휴일입니다: {holiday_name})")
+        else:
+            print("❌ 실행 시간이 아닙니다. (평일 오전 5:45-6:00만 실행)")
         return
 
     # 1. 버스 정보 조회
@@ -196,8 +222,9 @@ def run_scheduler():
     print("=" * 60)
     print("🚌 202번 버스 자동 알림 시스템 시작")
     print("📍 정류장: 호반써밋라포레후문 (ID: 223000149)")
-    print("⏰ 실행 조건: 평일 오전 5:45-6:00, 1분마다")
+    print("⏰ 실행 조건: 평일(공휴일 제외) 오전 5:45-6:00, 1분마다")
     print("🎯 알림 조건: 시간대 내에서는 항상 푸시 발송")
+    print("🏖️  공휴일 제외: 한국 공휴일에는 실행하지 않음")
     print("=" * 60)
 
     # 매분마다 실행하도록 스케줄 설정
